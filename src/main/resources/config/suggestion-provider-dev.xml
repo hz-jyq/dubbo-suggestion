@@ -16,6 +16,8 @@
 		<property name="locations">
 		   <list>
 		   	  <value>classpath:config/dev/suggestion-jdbc.properties</value>	
+		   	  <value>classpath:config/dev/suggestion-redis.properties</value>	
+		   	  <value>classpath:config/dev/suggestion-mq.properties</value>
 		  </list>
 		</property>
 	</bean>
@@ -23,6 +25,8 @@
 	<import resource="classpath*:config/suggestion-component.xml"/>
 	<import resource="classpath*:config/suggestion-db.xml"/>
 	<import resource="classpath*:config/suggestion-beans.xml"/>
+	<import resource="classpath*:config/suggestion-redis.xml"/>
+	
 	
 	<import resource="classpath:config/dubbo-zookeeper-beans.xml"/>
 	<import resource="classpath:config/dubbo-suggestion-provider-beans.xml"/>

@@ -1,12 +1,17 @@
 package com.fengdai.suggestion.service;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.io.Serializable;
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,6 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 
 import com.fengdai.suggestion.base.BaseTest;
+import com.fengdai.suggestion.model.MySuggestion;
 
 
 public class SuggestionServiceTest  extends BaseTest{
@@ -89,7 +95,6 @@ public class SuggestionServiceTest  extends BaseTest{
 	
 	@Test
 	public void lock() {
-		
 		ReentrantLock lock = new ReentrantLock();
 		lock.lock();
 		ExecutorService se = Executors.newCachedThreadPool();
@@ -139,8 +144,58 @@ public class SuggestionServiceTest  extends BaseTest{
 	    	num=i;
 	    	System.out.println(num);
 			
-	    }
+	}
 	
+	 @Test
+	 public void update1(){
+		 
+		 	byte b=-1;
+		 	byte[] by={'1','0','1','1','1','0','1','1'};
+		 	byte[] by1=new byte[]{1,2,3};
+		 	String s=new String(by);
+		 	//Integer s1=new Integer(by1);
+	    	System.out.println(s);
+	       	System.out.println();
+	    	//System.out.println(s1);
+			
+	}
+	
+	 @Test
+		public void tesTtransient1() throws FileNotFoundException {
+		MySuggestion my= new  MySuggestion();
+		my.setContext("111");
+		ByteArrayOutputStream b=new ByteArrayOutputStream();
+		 try {
+			ObjectOutputStream obj=new ObjectOutputStream(b);
+			obj.writeObject(my);
+			obj.flush();
+			b.flush();
+			b.close();
+		    obj.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		ByteArrayInputStream byteArrayInputStream=new ByteArrayInputStream(b.toByteArray());
+		ObjectInputStream ob = null;
+		try {
+			ob=new ObjectInputStream(byteArrayInputStream);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+		ob.readObject();
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	 }
+	 
 	@Test
     public void tesTtransient() throws FileNotFoundException, IOException, ClassNotFoundException{  
         People p = new People();  
@@ -188,5 +243,15 @@ public class SuggestionServiceTest  extends BaseTest{
 		}
 	}
 	
+	 public byte[] ObjectToByteArray(Object obj)throws Exception{  
+	        byte [] bytes=null;
+	        ByteArrayOutputStream baos= new ByteArrayOutputStream();
+	        ObjectOutputStream oos = new ObjectOutputStream(baos);
+	        oos.writeObject(obj);
+	        oos.close();
+	        bytes=baos.toByteArray();
+	        baos.close();
+	        return bytes;
+	    }
 }
 
