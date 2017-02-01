@@ -25,6 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 
 import com.fengdai.suggestion.base.BaseTest;
+import com.fengdai.suggestion.form.MySuggestionForm;
 import com.fengdai.suggestion.model.MySuggestion;
 
 
@@ -41,6 +42,11 @@ public class SuggestionServiceTest  extends BaseTest{
 	public void testcheckUniqueByName() {
 		System.out.println(mySuggestionService.selectByPrimaryKey("11").getContext());
 	}
+	@Test
+	public void testcheckUniqueByName1() {
+		System.out.println(mySuggestionService.pageMySuggestion(new MySuggestionForm()));
+	}
+	
 	@Test
 	public void aslist() {
 		List<StringBuffer> relateSrtList=new ArrayList<StringBuffer>();

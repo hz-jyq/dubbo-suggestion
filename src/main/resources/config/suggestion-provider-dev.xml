@@ -27,7 +27,7 @@
 	<import resource="classpath*:config/suggestion-beans.xml"/>
 	<import resource="classpath*:config/suggestion-redis.xml"/>
 	<import resource="classpath*:config/suggestion-tx.xml"/>
-	
+	<import resource="classpath*:config/suggestion-interceptor.xml"/>
 	
 	<import resource="classpath:config/dubbo-zookeeper-beans.xml"/>
 	<import resource="classpath:config/dubbo-suggestion-provider-beans.xml"/>
